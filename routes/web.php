@@ -28,9 +28,12 @@ Route::middleware(['isLogedIn'])->group(function () {
 
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/index', 'index')->name('category_list');
+        Route::post('/datatable', 'datatable')->name('category.datatable');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/destroy', 'destroy')->name('destroy');
+
     });
 });
 

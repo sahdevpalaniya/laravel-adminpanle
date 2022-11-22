@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Validator;
+use DataTables;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -14,6 +15,19 @@ class CategoryController extends Controller
       $data = [];
       $data['page_title'] = 'Category List';
       return view('admin.category.index', $data);
+   }
+   public function datatable(Request $request)
+   {
+      $category = Category::all();
+      return datatables()->of($category)
+         ->addColumn('action', function ($category) {
+            $html = '<a href="' . route('edit', $category->id) . '" class="btn btn-xs btn-secondary btn-edit">Edit</a> ';
+            $html.='<a class="btn btn-xs btn-danger btn-delete btnDelete" data-url="' . route('destroy') . '" data-id="' . $category->id . '" title="Delete">Delete</a>';
+            return $html;
+         })
+         ->editColumn('created_at',function($category){
+            return isset($category->created_at) ? date('d/m/Y',strtotime($category->created_at)) : '-';
+         })->toJson();
    }
 
    public function create()
@@ -53,6 +67,21 @@ class CategoryController extends Controller
       $category->category_quantity = $request['category_quantity'];
       $category->status = $request['status'];
       $category->save();
+
+      Session::flash('success', ' Category ' . $action . ' successfully.');
       return redirect()->route('category_list');
+   }
+
+   public function destroy(Request $request)
+   {
+      if ($request->ajax()) {
+         $category = Category::where('id', $request->id)->first();
+         if ($category) {
+            $category->delete();
+            $return=true;
+         }
+      }
+
+      return response()->json($return);
    }
 }

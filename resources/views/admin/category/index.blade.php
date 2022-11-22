@@ -14,7 +14,7 @@
                                   <h4 class="card-title mb-4">{{ isset($page_title) ? $page_title : 'Page Title' }}</h4>
                               </div>
                               <div class="col-lg-6 text-right">
-                                  <a href="{{route('create')}}" class="float-end">
+                                  <a href="{{ route('create') }}" class="float-end">
                                       <button type="button" class="btn btn-primary">create</button>
                                   </a>
                               </div>
@@ -32,9 +32,6 @@
                                               <th>Action</th>
                                           </tr>
                                       </thead>
-                                      <tbody>
-
-                                      </tbody>
                                   </table>
                               </div>
                           </div>
@@ -43,10 +40,37 @@
               </div>
           </div>
       @endsection
-      @section('script')
+      @section('scripts')
+          @parent
           <script>
               $(document).ready(function() {
-                $('#dataTable').DataTable();
+                  var url = '{!! route('category.datatable') !!}';
+                  var columns = [{
+                          data: 'id',
+                          name: 'id'
+                      },
+                      {
+                          data: 'category_name',
+                          name: 'category_name'
+                      },
+                      {
+                          data: 'category_price',
+                          name: 'category_price'
+                      },
+                      {
+                          data: 'category_quantity',
+                          name: 'category_quantity'
+                      },
+                      {
+                          data: 'created_at',
+                          name: 'created_at'
+                      },
+                      {
+                          data: 'action',
+                          name: 'action'
+                      },
+                  ];
+                  createDatatable(url, columns)
               });
           </script>
       @endsection

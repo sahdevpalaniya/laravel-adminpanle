@@ -9,17 +9,23 @@
     <title>@yield('title')</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url('assets/images/favicon.jpg') }}">
+    <!-- Sweetalert -->
     <link href="{{ url('assets/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
+    <!-- Datatable -->
+    <link href="{{ url('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <!-- Custom Stylesheet -->
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
     @section('style')
     @show
 </head>
 @include('admin.layouts.header')
 @include('admin.layouts.sidebar')
+
 <body>
     <div class="content-body">
         <div class="container-fluid">
             @include('admin.layouts.breadcrumb')
+            @include('admin.layouts.message')
             @yield('content')
         @show
         @include('admin.layouts.footer')
@@ -34,6 +40,9 @@
 {{-- DataTables Link --}}
 <script src="{{ url('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('assets/js/plugins-init/datatables.init.js') }}"></script>
+<!-- Comman Js File -->
+<script src="{{url('assets\js\common.js')}}"></script>
+<script src="{{url('assets\js\sweetalert.js')}}"></script>
 @show
 </body>
 
