@@ -28,6 +28,8 @@
             @include('admin.layouts.message')
             @yield('content')
         @show
+        @section('modals')
+        @show
         @include('admin.layouts.footer')
     </div>
 </div>

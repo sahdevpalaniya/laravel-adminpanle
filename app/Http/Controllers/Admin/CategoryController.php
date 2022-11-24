@@ -72,7 +72,7 @@ class CategoryController extends Controller
       return redirect()->route('category_list');
    }
 
-   public function destroy(Request $request)
+   public function destroy(Request $request) 
    {
       if ($request->ajax()) {
          $category = Category::where('id', $request->id)->first();
