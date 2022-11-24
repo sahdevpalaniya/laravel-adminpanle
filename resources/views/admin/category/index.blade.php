@@ -14,8 +14,9 @@
                                   <h4 class="card-title mb-4">{{ isset($page_title) ? $page_title : 'Page Title' }}</h4>
                               </div>
                               <div class="col-lg-6 text-right">
-                                  <!-- Large modal -->
-                                  <button type="button" class="btn btn-primary view">Largemodal</button>
+                                  <a href="{{ route('createPdf') }}" class="float-end">
+                                      <button type="button" class="btn btn-primary">create PDf</button>
+                                  </a>
                                   <a href="{{ route('create') }}" class="float-end">
                                       <button type="button" class="btn btn-primary">create</button>
                                   </a>
@@ -37,22 +38,6 @@
                                   </table>
                               </div>
                           </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      @endsection
-      @section('modals')
-          <div class="modal fade bd-example-modal-lg" tabindex="-1" id="myModal" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                          </button>
-                      </div>
-                      <div class="modal-body" id="modal-order-view"></div>
-                      <div class="modal-footer">
                       </div>
                   </div>
               </div>

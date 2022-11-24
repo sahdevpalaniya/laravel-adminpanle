@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use DataTables;
 use Session;
+use PDF;
 
 class CategoryController extends Controller
 {
@@ -22,11 +23,11 @@ class CategoryController extends Controller
       return datatables()->of($category)
          ->addColumn('action', function ($category) {
             $html = '<a href="' . route('edit', $category->id) . '" class="btn btn-light btn-edit"><i class="fa fa-pencil h4"></i></a> ';
-            $html.='<a class="btn btn-dark btn-delete btnDelete" data-url="' . route('destroy') . '" data-id="' . $category->id . '" title="Delete"><i class="fa fa-trash"></i></a>';
+            $html .= '<a class="btn btn-dark btn-delete btnDelete" data-url="' . route('destroy') . '" data-id="' . $category->id . '" title="Delete"><i class="fa fa-trash"></i></a>';
             return $html;
          })
-         ->editColumn('created_at',function($category){
-            return isset($category->created_at) ? date('d/m/Y',strtotime($category->created_at)) : '-';
+         ->editColumn('created_at', function ($category) {
+            return isset($category->created_at) ? date('d/m/Y', strtotime($category->created_at)) : '-';
          })->toJson();
    }
 
@@ -72,16 +73,27 @@ class CategoryController extends Controller
       return redirect()->route('category_list');
    }
 
-   public function destroy(Request $request) 
+   public function destroy(Request $request)
    {
       if ($request->ajax()) {
          $category = Category::where('id', $request->id)->first();
          if ($category) {
             $category->delete();
-            $return=true;
+            $return = true;
          }
       }
-
       return response()->json($return);
+   }
+
+   public function createPDF()
+   {
+      $data = [
+         'title' => 'Category List',
+         'date' => date('m/d/Y'),
+         'categorys' => Category::all(),
+      ];
+      $pdf = PDF::loadView('categoryPDF', $data);
+
+      return $pdf->download('Category List.pdf');
    }
 }

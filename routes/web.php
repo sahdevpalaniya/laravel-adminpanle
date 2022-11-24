@@ -33,6 +33,8 @@ Route::middleware(['isLogedIn'])->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/destroy', 'destroy')->name('destroy');
+        Route::get('/createPdf', 'createPdf')->name('createPdf');
+
 
     });
 });
