@@ -21,8 +21,8 @@ class CategoryController extends Controller
       $category = Category::all();
       return datatables()->of($category)
          ->addColumn('action', function ($category) {
-            $html = '<a href="' . route('edit', $category->id) . '" class="btn btn-xs btn-secondary btn-edit">Edit</a> ';
-            $html.='<a class="btn btn-xs btn-danger btn-delete btnDelete" data-url="' . route('destroy') . '" data-id="' . $category->id . '" title="Delete">Delete</a>';
+            $html = '<a href="' . route('edit', $category->id) . '" class="btn btn-light btn-edit"><i class="fa fa-pencil h4"></i></a> ';
+            $html.='<a class="btn btn-dark btn-delete btnDelete" data-url="' . route('destroy') . '" data-id="' . $category->id . '" title="Delete"><i class="fa fa-trash"></i></a>';
             return $html;
          })
          ->editColumn('created_at',function($category){
