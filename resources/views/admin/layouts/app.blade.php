@@ -11,6 +11,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url('assets/images/favicon.jpg') }}">
     <!-- Sweetalert -->
     <link href="{{ url('assets/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ url('assets/vendor/toastr/css/toastr.min.css') }}">
     <!-- Datatable -->
     <link href="{{ url('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <!-- Custom Stylesheet -->
@@ -25,7 +27,6 @@
     <div class="content-body">
         <div class="container-fluid">
             @include('admin.layouts.breadcrumb')
-            @include('admin.layouts.message')
             @yield('content')
         @show
         @section('modals')
@@ -43,8 +44,19 @@
 <script src="{{ url('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('assets/js/plugins-init/datatables.init.js') }}"></script>
 <!-- Comman Js File -->
-<script src="{{url('assets\js\common.js')}}"></script>
-<script src="{{url('assets\js\sweetalert.js')}}"></script>
+<script src="{{ url('assets\js\common.js') }}"></script>
+{{-- Sweet Alert --}}
+<script src="{{ url('assets\js\sweetalert.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ url('assets/vendor/toastr/js/toastr.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins-init/toastr-init.js') }}"></script>
+
+
+@if (Session::has('alert-message'))
+    <script>
+        toastr.success("{{ Session::get('alert-message') }}","Success");
+    </script>
+@endif
 @show
 </body>
 

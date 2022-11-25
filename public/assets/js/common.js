@@ -24,13 +24,6 @@ function reload() {
     table.ajax.reload("null", false);
 }
 
-function aaa(icon,title,text){
-    Swal.fire({
-    icon: icon,
-    title: title,
-    text: text,
-  });
-}
 $(document).on('click', '.btnDelete', function () {
     var id = $(this).data('id');
     var url = $(this).data('url');
@@ -54,7 +47,7 @@ $(document).on('click', '.btnDelete', function () {
                 dataType: 'json',
             }).done(function (data) {
                 if (data == true) {
-                    aaa('success','Record Deleted Successfully','Success')
+                    Swal.fire({icon:'success',title:'Record Deleted Successfully',text:'Success'});
                 } else {
                     
                 }

@@ -69,7 +69,8 @@ class CategoryController extends Controller
       $category->status = $request['status'];
       $category->save();
 
-      Session::flash('success', ' Category ' . $action . ' successfully.');
+      Session::flash('alert-message', ' Category ' . $action . ' successfully.');
+      Session::flash('alert-class', 'success');
       return redirect()->route('category_list');
    }
 
