@@ -17,11 +17,11 @@ use App\Http\Controllers\Admin\CategoryController;
 */
 
 Route::get('/', [LoginContoller::class, 'index'])->name('login')->middleware('alreadylogedin');
-Route::post('/login/check', [LoginContoller::class, 'user_check'])->name('login-check');
-Route::get('/forgot_password', [LoginContoller::class, 'forgotpass'])->name('forgotpass');
-Route::post('/send_email', [LoginContoller::class, 'send_email'])->name('send.email');
-Route::get('/resetpassword/{token}', [LoginContoller::class, 'reset_password'])->name('reset.password');
-Route::post('/change_password', [LoginContoller::class, 'change_password'])->name('change.pass');
+Route::post('/login/check', [LoginContoller::class, 'user_check'])->middleware('alreadylogedin')->name('login-check');
+Route::get('/forgot_password', [LoginContoller::class, 'forgotpass'])->middleware('alreadylogedin')->name('forgotpass');
+Route::post('/send_email', [LoginContoller::class, 'send_email'])->name('send.email')->middleware('alreadylogedin');
+Route::get('/resetpassword/{token}', [LoginContoller::class, 'reset_password'])->middleware('alreadylogedin')->name('reset.password');
+Route::post('/change_password', [LoginContoller::class, 'change_password'])->middleware('alreadylogedin')->name('change.pass');
 
 Route::middleware(['isLogedIn'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('admin-dashboard');
