@@ -16,7 +16,7 @@ class AlreadyLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (session()->has('userid') && (url('/') == $request->url('')) or (url('/forgot_password') == $request->url('forgot_password')) or (url('/change_password') == $request->url('change_password'))) {
+        if (session()->has('userid') && (url('/') == $request->url('')) or (url('/forgot_password') == $request->url('forgot_password'))) {
             return back();
         }
         return $next($request);
