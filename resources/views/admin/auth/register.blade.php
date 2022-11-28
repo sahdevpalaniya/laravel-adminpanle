@@ -21,15 +21,19 @@
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
-                                    <h3 class="text-center mb-4">{{$form_heading}}</h3>
-                                    @if (Session::has('error'))
-                                        <div class="alert alert-danger">{{ Session::get('error') }}</div>
-                                    @endif
-                                    @if (Session::has('success'))
-                                        <div class="alert alert-success">{{ Session::get('success') }}</div>
-                                    @endif
-                                    <form action="{{ route('login-check') }}" method="POST">
+                                    <h3 class="text-center mb-4">{{ $form_heading }}</h3>
+                                    <form action="{{ route('register') }}" method="POST">
                                         @csrf
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="name" class="form-control" placeholder="Enter Your Name"
+                                                name="name" value="{{ old('name') }}">
+                                            <span class="text-danger">
+                                                @error('name')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
                                         <div class="form-group">
                                             <label for="email">E-mail</label>
                                             <input type="email" class="form-control" placeholder="Enter Your E-mail"
@@ -50,19 +54,27 @@
                                                 @enderror
                                             </span>
                                         </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-9"></div>
-                                            <div class="col-3"><a href="{{route('forgotpass')}}">Forgot Password ??</a></div>
+                                        <div class="form-group">
+                                            <label for="password_confirmation">Confirm Password</label>
+                                            <input type="password" class="form-control"
+                                                placeholder="Enter Your Confirm Password" name="password_confirmation"
+                                                value="">
+                                            <span class="text-danger">
+                                                @error('password_confirmation')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                         <br>
+                                        <br>
                                         <div class="form-group">
-                                            <button class="btn btn-block btn-primary" type="submit">Sign Me In</button>
+                                            <button class="btn btn-block btn-primary" type="submit">Submit</button>
                                         </div>
                                         <br>
                                     </form>
                                     <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary" href="{{ route('register') }}">Sign up</a></p>
+                                        <p>Already Accout Exits ?<a class="text-primary"
+                                                href="{{ route('login') }}">Sign up</a></p>
                                     </div>
                                 </div>
                             </div>

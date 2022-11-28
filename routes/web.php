@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LoginContoller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,9 @@ use App\Http\Controllers\Admin\CategoryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/register', [RegisterController::class, 'index'])->middleware('alreadylogedin')->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register');
+
 
 Route::get('/', [LoginContoller::class, 'index'])->name('login')->middleware('alreadylogedin');
 Route::post('/login/check', [LoginContoller::class, 'user_check'])->middleware('alreadylogedin')->name('login-check');

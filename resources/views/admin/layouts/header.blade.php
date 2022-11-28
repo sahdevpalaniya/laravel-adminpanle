@@ -1,4 +1,3 @@
-
 <body>
 
     <!--**********************************
@@ -10,10 +9,10 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="{{route('admin-dashboard')}}" class="brand-logo">
-                <img class="logo-abbr" src="{{url('assets/images/favicon.jpg')}}" alt="">
-                <img class="logo-compact" src="{{url('assets/images/logo-text.png')}}" alt="">
-                <img class="brand-title" src="{{url('assets/images/logo-text.png')}}" alt="">
+            <a href="{{ route('admin-dashboard') }}" class="brand-logo">
+                <img class="logo-abbr" src="{{ url('assets/images/favicon.jpg') }}" alt="">
+                <img class="logo-compact" src="{{ url('assets/images/logo-text.png') }}" alt="">
+                <img class="brand-title" src="{{ url('assets/images/logo-text.png') }}" alt="">
             </a>
 
             <div class="nav-control">
@@ -40,7 +39,8 @@
                                 </span>
                                 <div class="dropdown-menu p-0 m-0">
                                     <form>
-                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                        <input class="form-control" type="search" placeholder="Search"
+                                            aria-label="Search">
                                     </form>
                                 </div>
                             </div>
@@ -49,10 +49,11 @@
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                                    {{ session()->has('username') ? Session::get('username') :'' }}
+                                    <i class="mdi mdi-account has-arrow"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="" class="dropdown-item">
+                                    <a href="{{ route('logout') }}" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Logout </span>
                                     </a>

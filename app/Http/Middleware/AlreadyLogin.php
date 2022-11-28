@@ -15,8 +15,11 @@ class AlreadyLogin
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
-        if (session()->has('userid') && (url('/') == $request->url('')) or (url('/forgot_password') == $request->url('forgot_password'))) {
+    {   
+        if(session()->has('userid') && (url('/') == $request->url('')) or (url('/forgot_password') == $request->url('forgot_password'))){
+            return back();
+        }
+        elseif(session()->has('userid') && (url('/register') == $request->url('register'))){
             return back();
         }
         return $next($request);
