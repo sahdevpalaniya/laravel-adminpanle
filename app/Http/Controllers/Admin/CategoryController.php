@@ -15,6 +15,7 @@ class CategoryController extends Controller
    {
       $data = [];
       $data['page_title'] = 'Category List';
+      $data['back_page_title'] = 'Dashboard';
       return view('admin.category.index', $data);
    }
    public function datatable(Request $request)
@@ -35,6 +36,7 @@ class CategoryController extends Controller
    {
       $data = [];
       $data['page_title'] = 'Add Category';
+      $data['back_page_title'] = 'Category List';
       return view('admin.category.create', $data);
    }
 
@@ -42,6 +44,7 @@ class CategoryController extends Controller
    {
       $data = [];
       $data['page_title'] = 'Edit Category';
+      $data['back_page_title'] = 'Category List';
       $data['category'] = Category::find($id);
       return view('admin.category.create', $data);
    }
