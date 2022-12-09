@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('pincodes', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name');
-            $table->integer('category_price');
-            $table->integer('category_quantity');
-            $table->string('category_image');
+            $table->integer('city_id');
+            $table->integer('pincode');
             $table->integer('status');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('pincodes');
     }
 };

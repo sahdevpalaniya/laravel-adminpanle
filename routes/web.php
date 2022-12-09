@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LoginContoller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PincodeController;
 use App\Http\Controllers\Admin\RegisterController;
 
 /*
@@ -16,6 +17,7 @@ use App\Http\Controllers\Admin\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('alreadylogedin')->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 
@@ -38,8 +40,17 @@ Route::middleware(['isLogedIn'])->group(function () {
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/destroy', 'destroy')->name('destroy');
         Route::get('/createPdf', 'createPdf')->name('createPdf');
+    });
+});
 
+// use prefix
 
+Route::group(['as' => 'pincode.', 'prefix' => 'pincode', 'middleware' => ['isLogedIn']], function () {
+    Route::controller(PincodeController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/state/{id?}','state')->name('state');
+        Route::post('/city/{id?}','city')->name('city');
     });
 });
 

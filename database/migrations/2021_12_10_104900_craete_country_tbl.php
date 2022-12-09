@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CraeteCountryTbl extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name');
-            $table->integer('category_price');
-            $table->integer('category_quantity');
-            $table->string('category_image');
-            $table->integer('status');
+            $table->string("name")->nullable();
+            $table->string("name_ch")->nullable();
+            $table->string("code")->nullable();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('countries');
     }
-};
+}

@@ -15,8 +15,13 @@
     <link rel="stylesheet" href="{{ url('assets/vendor/toastr/css/toastr.min.css') }}">
     <!-- Datatable -->
     <link href="{{ url('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    {{-- Select2 --}}
+    <link rel="stylesheet" href="{{ url('assets/vendor/select2/css/select2.min.css') }}">
     <!-- Custom Stylesheet -->
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+    {{-- Dropify --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" rel="stylesheet" />
+
     @section('style')
     @show
 </head>
@@ -50,11 +55,18 @@
 <!-- Toastr -->
 <script src="{{ url('assets/vendor/toastr/js/toastr.min.js') }}"></script>
 <script src="{{ url('assets/js/plugins-init/toastr-init.js') }}"></script>
+{{-- Select2 --}}
+<script src="{{ url('assets/vendor/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ url('assets/js/plugins-init/select2-init.js') }}"></script>
+{{-- Dropify --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+
 
 
 @if (Session::has('alert-message'))
     <script>
-        toastr.success("{{ Session::get('alert-message') }}","Success");
+        toastr.success("{{ Session::get('alert-message') }}", "Success");
     </script>
 @endif
 @show

@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-validation">
-                        <form class="form-valide" action="{{ route('store') }}" method="post">
+                        <form class="form-valide" action="{{ route('store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-6">
@@ -66,7 +66,17 @@
                                         <label class="form-check-label" for="0">Deactive</label>
                                     </div>
                                 </div>
-                            </div><br>
+                            </div>
+
+                            <div class="row">
+                                <label class="form-label">Category
+                                    Image<span class="text-danger">*</span></label>
+                                <input type="file" name="image" id="image" class="dropify dropify-event"
+                                    data-default-file="" />
+                                @error('image')
+                                    <span class="text text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
                             <div>
                                 <button type="submit" class="btn btn-primary w-md">Submit</button>
@@ -77,4 +87,11 @@
                 </div>
             </div>
         </div>
+    @endsection
+
+    @section('scripts')
+        @parent
+        <script>
+            $('.dropify').dropify();
+        </script>
     @endsection

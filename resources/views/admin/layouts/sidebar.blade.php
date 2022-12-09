@@ -12,8 +12,8 @@
                         class="nav-text">Category</span></a>
             </li>
 
-            <li><a href="javascript:void()" aria-expanded="false"><i class="icon icon-chart-bar-33"></i><span
-                        class="nav-text">Charts</span></a>
+            <li><a href="{{ route('pincode.index') }}" aria-expanded="false"><i class="icon icon-chart-bar-33"></i><span
+                        class="nav-text">Pincodes</span></a>
             </li>
         </ul>
     </div>

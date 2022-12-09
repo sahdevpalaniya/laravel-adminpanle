@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use DataTables;
+// use DataTables;
+use File;
 use Session;
+use Yajra\DataTables\DataTables;
 use PDF;
 
 class CategoryController extends Controller
@@ -21,8 +23,8 @@ class CategoryController extends Controller
    }
    public function datatable(Request $request)
    {
-      $category = Category::all();
-      return datatables()->of($category)
+      // $category = Category::all();
+      return DataTables::eloquent($partner)
          ->addColumn('action', function ($category) {
             $html = '<a href="' . route('edit', $category->id) . '" class="btn btn-light btn-edit"><i class="fa fa-pencil h4"></i></a> ';
             $html .= '<a class="btn btn-dark btn-delete btnDelete" data-url="' . route('destroy') . '" data-id="' . $category->id . '" title="Delete"><i class="fa fa-trash"></i></a>';
@@ -69,6 +71,22 @@ class CategoryController extends Controller
          $category->created_at    = date('Y-m-d H:i:s');
          $action              = 'added';
       }
+
+      if ($image = $request->image) {
+         if ($category->category_image != '') {
+            $categoryImage = public_path('uploads/CategoryImage' . $category->category_image);
+            if (File::exists($categoryImage)) {
+               unlink($categoryImage);
+            }
+         }
+      }
+      $categoryImage = uniqid() . "." . $image->getClientOriginalExtension();
+      $path = 'uploads/CategoryImage/';
+      $upload_image = $image->move($path, $categoryImage);
+      if ($upload_image) {
+         $category->category_image = $categoryImage;
+      }
+
       $category->category_name = $request['category_name'];
       $category->category_price = $request['category_price'];
       $category->category_quantity = $request['category_quantity'];
